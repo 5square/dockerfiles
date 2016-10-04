@@ -1,0 +1,10 @@
+FROM php:5.6
+
+ENV COMPOSER_VERSION=1.2.1
+
+RUN apt-get update && apt-get install -y zlib1g-dev git
+
+RUN curl -o /usr/local/bin/composer https://getcomposer.org/download/$COMPOSER_VERSION/composer.phar
+RUN chmod a+x /usr/local/bin/composer
+
+RUN docker-php-ext-install -j$(nproc) zip
