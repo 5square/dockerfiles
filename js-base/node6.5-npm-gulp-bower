@@ -1,0 +1,5 @@
+FROM node:6.5
+MAINTAINER  Jan Burkl (jan@zend.com)
+
+RUN npm install -g bower
+RUN npm install -g gulp
