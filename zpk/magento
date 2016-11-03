@@ -1,0 +1,3 @@
+FROM scratch
+
+RUN wget "http://updates.zend.com/zpkai/index.php?name=Magento&version=&name=Magento&version=" -O magento.zpk
