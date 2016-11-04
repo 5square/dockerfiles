@@ -1,5 +1,4 @@
-
 FROM php:5.6
 
-RUN curl -o /usr/local/bin/zsclient RUN wget https://github.com/zend-patterns/ZendServerSDK/raw/master/bin/zs-client.phar
+RUN curl -o /usr/local/bin/zsclient https://github.com/zend-patterns/ZendServerSDK/raw/master/bin/zs-client.phar
 RUN chmod a+x /usr/local/bin/zsclient
