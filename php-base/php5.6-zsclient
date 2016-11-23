@@ -1,6 +1,6 @@
 FROM php:5.6
 
-RUN apt-get update && apt-get install -y zlib1g-dev && rm -rf /var/lib/apt/lists/* 
+RUN apt-get update && apt-get install -y zlib1g-dev jq && rm -rf /var/lib/apt/lists/* 
 RUN docker-php-ext-install zip
 
 RUN curl -L -o /usr/local/bin/zsclient https://github.com/zend-patterns/ZendServerSDK/raw/master/bin/zs-client.phar
