@@ -1,0 +1,10 @@
+FROM alpine
+
+ENV DOWNLOAD_URL=http://updates.zend.com/zpkaiv1/index.php
+ENV APP_NAME=Wordpress
+ENV OS=LINUX
+ENV ARCH=x86_64
+
+WORKDIR /
+RUN mkdir /zpk
+RUN wget "$DOWNLOAD_URL?name=$APP_NAME&os=$OS&arch=$ARCH" -O /zpk/wordpress.zpk
