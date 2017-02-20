@@ -1,0 +1,10 @@
+FROM alpine
+
+RUN apk --update add git \
+    && rm -rf /var/cache/apk/*
+    
+VOLUME /git
+WORKDIR /git
+
+ENTRYPOINT ["git"]
+CMD ["--help"]
