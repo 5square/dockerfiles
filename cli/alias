@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function mysql-client() {
+  NET=`docker inspect --format='{{.HostConfig.NetworkMode}}' $5`
+  HOSTNAME=`docker inspect --format='{{.Config.Hostname}}' $5`
+  docker run -ti --rm --net $NET cli/mysql $1 $2 $3 -h $HOSTNAME
+}
+
+alias git-docker="docker run -ti --rm -v $(pwd):/git cli/git"
+
+alias mysql="mysql-client"
