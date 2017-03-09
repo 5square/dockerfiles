@@ -5,6 +5,4 @@ ENV APP_NAME=Magento
 ENV OS=LINUX
 ENV ARCH=x86_64
 
-WORKDIR /
-RUN mkdir /zpk
 RUN wget "$DOWNLOAD_URL?name=$APP_NAME&os=$OS&arch=$ARCH" -O /zpk/magento.zpk
