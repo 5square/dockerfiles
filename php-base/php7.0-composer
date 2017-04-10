@@ -13,7 +13,7 @@ RUN docker-php-ext-install zip
 
 USER app
 
-VOLME /src
+VOLUME /src
 
 WORKDIR /src
 
