@@ -1,8 +1,10 @@
-FROM php:7.0
+FROM php:7.1-alpine
 
 ENV COMPOSER_VERSION=1.2.1
 
-RUN apt-get update && apt-get install -y zlib1g-dev git
+RUN addgroup -S app && adduser -S -g app app
+
+RUN apk --no-cache add zlib-dev git
 
 RUN curl -o /usr/local/bin/composer https://getcomposer.org/download/$COMPOSER_VERSION/composer.phar
 RUN chmod a+x /usr/local/bin/composer
