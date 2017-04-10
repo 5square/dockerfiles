@@ -9,7 +9,7 @@ RUN apk --no-cache add zlib-dev git
 RUN curl -o /usr/local/bin/composer https://getcomposer.org/download/$COMPOSER_VERSION/composer.phar
 RUN chmod a+x /usr/local/bin/composer
 
-RUN docker-php-ext-install -j$(nproc) zip
+RUN docker-php-ext-install zip
 
 USER app
 
