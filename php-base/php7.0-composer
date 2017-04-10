@@ -2,7 +2,7 @@ FROM php:7.1-alpine
 
 ENV COMPOSER_VERSION=1.2.1
 
-RUN addgroup -g 1000 -S app && adduser -S -g -u 1000 app app
+RUN addgroup -g 1000 -S app && adduser -S -G -u 1000 app app
 
 RUN apk --no-cache add zlib-dev git
 
