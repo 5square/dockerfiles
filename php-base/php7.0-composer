@@ -2,7 +2,7 @@ FROM php:7.1-alpine
 
 ENV COMPOSER_VERSION=1.2.1
 
-RUN addgroup -S app && adduser -S -g app app
+RUN addgroup -S -u 1000 app && adduser -S -g -u 1000 app app
 
 RUN apk --no-cache add zlib-dev git
 
@@ -10,3 +10,7 @@ RUN curl -o /usr/local/bin/composer https://getcomposer.org/download/$COMPOSER_V
 RUN chmod a+x /usr/local/bin/composer
 
 RUN docker-php-ext-install -j$(nproc) zip
+
+USER app
+
+ENTRYPOINT ["/usr/local/bin/composer"]
