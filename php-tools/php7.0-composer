@@ -1,10 +1,20 @@
-FROM php:7.0
+FROM php:7.1-alpine
 
 ENV COMPOSER_VERSION=1.2.1
 
-RUN apt-get update && apt-get install -y zlib1g-dev git
+RUN addgroup -g 1000 -S app && adduser -S -G app -u 1000 app
+
+RUN apk --no-cache add zlib-dev git
 
 RUN curl -o /usr/local/bin/composer https://getcomposer.org/download/$COMPOSER_VERSION/composer.phar
 RUN chmod a+x /usr/local/bin/composer
 
-RUN docker-php-ext-install -j$(nproc) zip
+RUN docker-php-ext-install zip
+
+USER app
+
+VOLUME /src
+
+WORKDIR /src
+
+ENTRYPOINT ["/usr/local/bin/composer"]
