@@ -4,6 +4,8 @@ docker build -f git -t cli/git .
 
 docker build -f mysql -t cli/mysql .
 
+docker build -f composer -t cli/composer .
+
 echo
 echo Make sure that file 
 echo ~/.bash_profile

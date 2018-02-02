@@ -1,0 +1,18 @@
+FROM amd64/php:7.2-cli-alpine3.6
+
+RUN apk add --no-cache git
+
+ENV COMPOSER_VERSION=1.2.1
+
+RUN curl -o /usr/local/bin/composer https://getcomposer.org/download/$COMPOSER_VERSION/composer.phar
+RUN chmod a+x /usr/local/bin/composer
+
+RUN addgroup -g 1000 -S app && adduser -S -G app -u 1000 app
+
+USER app
+
+VOLUME /src
+
+WORKDIR /src
+
+ENTRYPOINT ["/usr/local/bin/composer"]

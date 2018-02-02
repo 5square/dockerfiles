@@ -1,11 +1,32 @@
 #!/bin/bash
 
+WD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+OLD_WD=$PWD
+
 function mysql-client() {
   NET=`docker inspect --format='{{.HostConfig.NetworkMode}}' $5`
   HOSTNAME=`docker inspect --format='{{.Config.Hostname}}' $5`
   docker run -ti --rm --net $NET cli/mysql $1 $2 $3 -h $HOSTNAME
 }
 
+function kibana-start() {
+  if [[ $# -eq 0 ]] ; then
+    echo 'Please pass elasticsearch IP or host name as 1 argument'
+    return
+  fi
+  KIBANA_NAME=$(docker-compose -f $WD/services/docker-compose.yml run -d -e ELASTICSEARCH_URL=http://$1:9200 kibana && docker-compose -f $WD/services/docker-compose.yml ps | grep kibana)
+  docker ps | grep $KIBANA_NAME
+}
+
 alias git-docker="docker run -ti --rm -v $(pwd):/git cli/git"
 
 alias mysql="mysql-client"
+
+alias composer='docker run -ti --rm -v ~/code/.composer-cache:/composer/cache -v $(pwd):/src cli/composer'
+
+alias dockercleanup="cd $WD/services && docker-compose run dockercleanup && cd $OLD_WD"
+
+alias portainer-start="docker-compose -f $WD/services/docker-compose.yml up -d portainer && docker-compose -f $WD/services/docker-compose.yml ps | grep portainer"
+alias portainer-stop="docker-compose -f $WD/services/docker-compose.yml stop portainer"
+
+alias kibana-stop="docker rm -f $(docker-compose -f $WD/services/docker-compose.yml ps -q kibana | tr '\n' ' ')"

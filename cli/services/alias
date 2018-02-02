@@ -1,0 +1,17 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+_pwd_alias_hell () {
+  if [[ `readlink -f ./` != `pwd` ]] then;
+    echo $fg_bold[red]You are in pwd alias hell!$reset_color
+    echo "pwd        =" $fg_bold[blue]`pwd`$reset_color
+    echo "actual pwd =" $fg_bold[blue]`dirname $0`$reset_color
+    echo pwd
+  fi
+}
+
+alias testpwd=$DIR
+
+alias portainer-start='docker-compose -f $(pwd)/docker-compose.yml up portainer'
+alias portainer-stop='docker-compose -f $(pwd)/docker-compose.yml down portainer'
