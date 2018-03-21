@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo -n -e "\033]0;PORTAINER START\007"
+
+WD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+docker-compose -f $WD/portainer.yml up -d portainer
+docker-compose -f $WD/portainer.yml ps | grep portainer
+
+#osascript -e 'say "Portainer has started!" using "Samantha"'
+osascript -e 'display notification "on port 9000 (http://localhost:9000)" with title "Portainer Has Started"'
+open http://localhost:9000
+
+exit

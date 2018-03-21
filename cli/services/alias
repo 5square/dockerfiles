@@ -12,6 +12,3 @@ _pwd_alias_hell () {
 }
 
 alias testpwd=$DIR
-
-alias portainer-start='docker-compose -f $(pwd)/docker-compose.yml up portainer'
-alias portainer-stop='docker-compose -f $(pwd)/docker-compose.yml down portainer'

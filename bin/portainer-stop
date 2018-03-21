@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo -n -e "\033]0;PORTAINER STOP\007"
+
+WD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+docker-compose -f $WD/portainer.yml stop portainer
+#osascript -e 'quit app (path to frontmost application as text)'
+
+#osascript -e 'say "Portainer has stopped!" using "Samantha"'
+osascript -e 'display notification "on port 9000 (http://localhost:9000)" with title "Portainer Has Stopped"'
+
+exit
